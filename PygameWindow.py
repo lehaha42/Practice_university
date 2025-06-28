@@ -20,8 +20,8 @@ class PygameWindow:
 
         self.BLACK, self.WHITE, self.GRAY = [0] * 3, [255] * 3, [120] * 3
         self.RESOLUTION = 50
-        self.QUALITY = 5000
-        self.LENGTH = 80
+        self.QUALITY = 10000
+        self.LENGTH = 200
 
     def text(self, text, x, y):
         text_surf = self.font.render(text, False, self.WHITE)
