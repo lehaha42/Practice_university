@@ -1,7 +1,5 @@
 import pygame as pg
-from math import sin, cos, pi, e
-
-from CommonResource import CommonResource
+from math import sin, cos, e
 
 
 class PygameWindow:

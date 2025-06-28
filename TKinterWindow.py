@@ -1,7 +1,5 @@
 import tkinter as tk
 
-from CommonResource import CommonResource
-
 
 class TKinterWindow:
 
