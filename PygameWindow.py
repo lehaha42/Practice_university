@@ -16,10 +16,10 @@ class PygameWindow:
         self.clock = pg.time.Clock()
         self.running = True
 
-        self.BLACK, self.WHITE, self.GRAY = [0] * 3, [255] * 3, [100] * 3
+        self.BLACK, self.WHITE, self.GRAY, self.GREEN = [0] * 3, [255] * 3, [100] * 3, [0, 255, 0]
         self.RESOLUTION = 100
         self.QUALITY = 10000
-        self.LENGTH = 200
+        self.time = 0
 
     def text(self, text, x, y):
         text_surf = self.font.render(text, False, self.WHITE)
@@ -57,16 +57,26 @@ class PygameWindow:
             pg.draw.line(self.screen, self.WHITE, [0, HEIGHT/2], [WIDTH, HEIGHT/2], 2)
             pg.draw.line(self.screen, self.WHITE, [WIDTH/2, 0], [WIDTH/2, HEIGHT], 2)
 
-            a, b = self.resourse.a, self.resourse.b
+            a, b, length = self.resourse.a, self.resourse.b, self.resourse.length
             px, py = 0, 0
 
             for i in range(self.QUALITY):
-                t = (i/self.QUALITY - .5) * self.LENGTH
+                t = (i/self.QUALITY - .5) * length
                 x = WIDTH/2 + self.RESOLUTION * cos(t) * a * e ** (b * t)
                 y = HEIGHT/2 - self.RESOLUTION * sin(t) * a * e ** (b * t)
                 if i > 0:
                     pg.draw.line(self.screen, self.WHITE, [px, py], [x, y])
                 px, py = x, y
+
+            if a != 0:
+                t = ((self.time / self.QUALITY) % 1 - .5) * length
+                x = WIDTH/2 + self.RESOLUTION * cos(t) * a * e ** (b * t)
+                y = HEIGHT/2 - self.RESOLUTION * sin(t) * a * e ** (b * t)
+                size = 6
+                pg.draw.rect(self.screen, self.GREEN, [x - size, y - size, size*2, size*2])
+                self.time += self.resourse.speed
+            else:
+                self.time = 0
 
             self.text('0', WIDTH/2, HEIGHT/2)
             self.text('1', WIDTH/2 + self.RESOLUTION, HEIGHT/2)
