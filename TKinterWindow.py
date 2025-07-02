@@ -30,16 +30,10 @@ class TKinterWindow:
         self.entry2.grid(row=3, column=1)
 
     def change_mode(self):
-        if self.resource.terminate:
-            self.root.destroy()
-            return
         self.resource.mode = 1 - self.resource.mode
         self.label1.configure(text=f'текущий режим: {['декартова', 'полярная'][self.resource.mode]}')
 
     def update(self):
-        if self.resource.terminate:
-            self.root.destroy()
-            return
         try:
             a = float(self.entry1.get())
             b = float(self.entry2.get())
@@ -48,6 +42,11 @@ class TKinterWindow:
         except Exception:
             pass
 
-    def run(self):
-        self.root.mainloop()
+    def on_close(self):
         self.resource.terminate = True
+        self.root.destroy()
+
+    def run(self):
+        self.root.protocol("WM_DELETE_WINDOW", self.on_close)
+        while not self.resource.terminate:
+            self.root.update()

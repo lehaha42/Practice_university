@@ -16,8 +16,8 @@ class PygameWindow:
         self.clock = pg.time.Clock()
         self.running = True
 
-        self.BLACK, self.WHITE, self.GRAY = [0] * 3, [255] * 3, [120] * 3
-        self.RESOLUTION = 50
+        self.BLACK, self.WHITE, self.GRAY = [0] * 3, [255] * 3, [100] * 3
+        self.RESOLUTION = 100
         self.QUALITY = 10000
         self.LENGTH = 200
 
@@ -33,6 +33,8 @@ class PygameWindow:
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_ESCAPE:
                         self.running = False
+                if event.type == pg.MOUSEWHEEL:
+                    self.RESOLUTION *= .97 ** -event.y
 
             WIDTH, HEIGHT = self.screen.get_width(), self.screen.get_height()
 
@@ -70,7 +72,7 @@ class PygameWindow:
             self.text('1', WIDTH/2 + self.RESOLUTION, HEIGHT/2)
             self.text('1', WIDTH/2, HEIGHT/2 - self.RESOLUTION)
             self.text('y', WIDTH/2, 0)
-            self.text('x', WIDTH - self.RESOLUTION/2, HEIGHT/2)
+            self.text('x', WIDTH - 30, HEIGHT/2)
 
             pg.display.flip()
             self.clock.tick(60)
