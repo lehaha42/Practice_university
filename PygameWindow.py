@@ -16,7 +16,7 @@ class PygameWindow:
         self.clock = pg.time.Clock()
         self.running = True
 
-        self.BLACK, self.WHITE, self.GRAY, self.GREEN = [0] * 3, [255] * 3, [100] * 3, [0, 255, 0]
+        self.BLACK, self.WHITE, self.GRAY, self.RED = [0] * 3, [255] * 3, [100] * 3, [255, 0, 0]
         self.RESOLUTION = 100
         self.QUALITY = 10000
         self.time = 0
@@ -73,7 +73,7 @@ class PygameWindow:
                 x = WIDTH/2 + self.RESOLUTION * cos(t) * a * e ** (b * t)
                 y = HEIGHT/2 - self.RESOLUTION * sin(t) * a * e ** (b * t)
                 size = 6
-                pg.draw.rect(self.screen, self.GREEN, [x - size, y - size, size*2, size*2])
+                pg.draw.rect(self.screen, self.RED, [x - size, y - size, size*2, size*2])
                 self.time += self.resourse.speed
             else:
                 self.time = 0
